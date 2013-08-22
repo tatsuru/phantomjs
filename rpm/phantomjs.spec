@@ -27,10 +27,10 @@ mkdir -p %{buildroot}%{prefix}/share/%{name}/examples
 %install
 cp bin/%{name} %{buildroot}%{prefix}/bin/%{name}
 cp examples/* %{buildroot}%{prefix}/share/%{name}/examples/
+cp CONTRIBUTING.md %{buildroot}%{prefix}/share/%{name}/
 cp ChangeLog %{buildroot}%{prefix}/share/%{name}/
 cp LICENSE.BSD %{buildroot}%{prefix}/share/%{name}/
 cp README.md %{buildroot}%{prefix}/share/%{name}/
-cp third-party.txt %{buildroot}%{prefix}/share/%{name}/
 
 %files
 %defattr(0444,root,root)
