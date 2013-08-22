@@ -1,9 +1,7 @@
-2012-12-19 18:36:40
+2013-07-25 23:22:39
 
-commit b13d9c164d11e83eab97bb8e49cb50b31262f435 (HEAD, tag: refs/tags/1.0.2, refs/remotes/origin/master, refs/remotes/origin/HEAD, refs/heads/master)
-Author: Ivan De Marino <ivan.de.marino@gmail.com>
-Date:   Wed Dec 19 18:33:31 2012 +0000
+commit e3c255e66f99fd34fbf03269b8dc44bafdda940a (HEAD, refs/remotes/origin/master, refs/remotes/origin/HEAD, refs/heads/master)
+Author: Ivan De Marino <detronizator@gmail.com>
+Date:   Thu Jul 25 00:21:44 2013 +0100
 
-    Bumping version to `1.0.2`.
-    
-    Also, importing Selenium `2.28.0` in tests.
+    Log "page.onError".

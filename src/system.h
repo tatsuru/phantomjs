@@ -76,7 +76,12 @@ public:
     // system.stdin
     QObject *_stdin();
 
+private slots:
+    void _onTerminalEncodingChanged(const QString &encoding);
+
 private:
+    File *createFileInstance(QFile *f);
+
     QStringList m_args;
     QVariant m_env;
     QMap<QString, QVariant> m_os;

@@ -34,8 +34,10 @@
 #include <QSslSocket>
 #include <QSysInfo>
 #include <QVariantMap>
+#include <QTextCodec>
 
 #include "../env.h"
+#include "terminal.h"
 
 System::System(QObject *parent) :
     QObject(parent)
@@ -123,6 +125,8 @@ System::System(QObject *parent) :
     m_os.insert("name", "unknown");
     m_os.insert("version", "unknown");
 #endif
+
+    connect(Terminal::instance(), SIGNAL(encodingChanged(QString)), this, SLOT(_onTerminalEncodingChanged(QString)));
 }
 
 System::~System()
@@ -176,7 +180,7 @@ QObject *System::_stdout() {
     if ((File *)NULL == m_stdout) {
         QFile *f = new QFile();
         f->open(stdout, QIODevice::WriteOnly | QIODevice::Unbuffered);
-        m_stdout = new File(f, (QTextCodec *)NULL, this);
+        m_stdout = createFileInstance(f);
     }
 
     return m_stdout;
@@ -186,7 +190,7 @@ QObject *System::_stderr() {
     if ((File *)NULL == m_stderr) {
         QFile *f = new QFile();
         f->open(stderr, QIODevice::WriteOnly | QIODevice::Unbuffered);
-        m_stderr = new File(f, (QTextCodec *)NULL, this);
+        m_stderr = createFileInstance(f);
     }
 
     return m_stderr;
@@ -196,8 +200,35 @@ QObject *System::_stdin() {
     if ((File *)NULL == m_stdin) {
         QFile *f = new QFile();
         f->open(stdin, QIODevice::ReadOnly | QIODevice::Unbuffered);
-        m_stdin = new File(f, (QTextCodec *)NULL, this);
+        m_stdin = createFileInstance(f);
     }
 
     return m_stdin;
+}
+
+// private slots:
+
+void System::_onTerminalEncodingChanged(const QString &encoding)
+{
+    if ((File *)NULL != m_stdin) {
+        m_stdin->setEncoding(encoding);
+    }
+
+    if ((File *)NULL != m_stdout) {
+        m_stdout->setEncoding(encoding);
+    }
+
+    if ((File *)NULL != m_stderr) {
+        m_stderr->setEncoding(encoding);
+    }
+}
+
+// private:
+
+File *System::createFileInstance(QFile *f)
+{
+    // Get the Encoding used by the Terminal at this point in time
+    Encoding e(Terminal::instance()->getEncoding());
+    QTextCodec *codec = e.getCodec();
+    return new File(f, codec, this);
 }

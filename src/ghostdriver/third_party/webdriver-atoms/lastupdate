@@ -1,7 +1,7 @@
-2012-11-04 20:35:20
+2013-06-17 02:01:14
 
-------------------------------------------------------------------------
-r18064 | simon.m.stewart@gmail.com | 2012-11-04 20:21:10 +0000 (Sun, 04 Nov 2012) | 1 line
+commit 4e90c975c693adf6252a92f753587b9c534806df (HEAD, tag: refs/tags/selenium-2.33.0)
+Author: Jim Evans <james.h.evans.jr@gmail.com>
+Date:   Wed May 22 11:14:19 2013 -0400
 
-SimonStewart: We appear to use an awful lot of memory during a build.
-------------------------------------------------------------------------
+    Bumping IEDriverServer version resources to 2.33.0.0
